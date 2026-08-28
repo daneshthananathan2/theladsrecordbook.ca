@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The official fantasy football record book of The Lads." />
+  <title>The Lads — Official Record Book</title>
+  <style>
+    :root{
+      --bg:#f7f1e7;
+      --panel:#fffaf2;
+      --ink:#211b17;
+      --muted:#74685c;
+      --line:#d9cbb8;
+      --accent:#8f2f2a;
+      --accent2:#b56b2d;
+      --gold:#c89d2d;
+      --shadow:0 8px 28px rgba(73,48,26,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Georgia, "Times New Roman", serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(181,107,45,.07), transparent 28%),
+        var(--bg);
+    }
+    a{color:inherit}
+    .wrap{width:min(1180px,92vw);margin:0 auto}
+    header{
+      padding:42px 0 26px;
+      text-align:center;
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow{
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      font-size:.76rem;
+      color:var(--muted);
+      font-weight:700;
+    }
+    h1{
+      margin:.28rem 0 .1rem;
+      font-size:clamp(3.2rem,8vw,6.6rem);
+      line-height:.95;
+      font-weight:700;
+    }
+    .seasonline{
+      margin-top:14px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--accent);
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .subline{
+      margin-top:8px;
+      color:var(--muted);
+      font-style:italic;
+      font-size:1.02rem;
+    }
+    nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(247,241,231,.96);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex;
+      gap:6px;
+      overflow-x:auto;
+      padding:10px 0;
+      scrollbar-width:none;
+    }
+    .nav-inner::-webkit-scrollbar{display:none}
+    .tab{
+      border:0;
+      background:transparent;
+      padding:11px 14px;
+      cursor:pointer;
+      white-space:nowrap;
+      font:700 .98rem Georgia,serif;
+      color:var(--muted);
+      border-bottom:2px solid transparent;
+    }
+    .tab.active{color:var(--accent);border-color:var(--accent)}
+    main{padding:34px 0 70px}
+    section.page{display:none}
+    section.page.active{display:block}
+    .section-kicker{
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      color:var(--accent);
+      font-size:.72rem;
+      font-weight:700;
+    }
+    h2{
+      font-size:clamp(2rem,4vw,3.1rem);
+      margin:.35rem 0 .35rem;
+    }
+    h3{font-size:1.55rem;margin:0 0 12px}
+    .lede{color:var(--muted);font-style:italic;font-size:1.08rem;margin:0 0 24px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:18px;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .stat{grid-column:span 3}
+    .wide{grid-column:span 8}
+    .side{grid-column:span 4}
+    .half{grid-column:span 6}
+    .full{grid-column:1/-1}
+    .stat .label{
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size:.72rem;
+      font-weight:700;
+    }
+    .stat .value{font-size:2rem;font-weight:700;margin-top:6px}
+    .stat .small{font-size:.9rem;color:var(--muted);margin-top:4px}
+    table{width:100%;border-collapse:collapse;font-size:.98rem}
+    th,td{padding:12px 10px;border-bottom:1px solid #eadfce;text-align:left}
+    th{
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.72rem;
+      color:var(--muted);
+    }
+    tr:last-child td{border-bottom:0}
+    .rank{font-weight:700;color:var(--accent)}
+    .pill{
+      display:inline-block;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:5px 9px;
+      font-size:.8rem;
+      color:var(--muted);
+      background:#fffdf8;
+    }
+    .champ{color:var(--gold);font-weight:700}
+    .accent{color:var(--accent);font-weight:700}
+    .note{
+      border-left:4px solid var(--gold);
+      background:#efe6d8;
+      color:#5d5146;
+      padding:13px 15px;
+      border-radius:8px;
+      line-height:1.5;
+    }
+    .season-card{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+    .season-card strong{font-size:1.22rem}
+    .season-meta{color:var(--muted);font-size:.92rem;margin-top:4px}
+    .trophy{font-size:1.6rem}
+    .record-list{display:grid;gap:12px}
+    .record-row{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 0;
+      border-bottom:1px solid #eadfce;
+    }
+    .record-row:last-child{border-bottom:0}
+    .record-row span:last-child{font-weight:700;text-align:right}
+    .livebox{
+      padding:16px;
+      border:1px dashed var(--line);
+      border-radius:14px;
+      background:#fffdf8;
+    }
+    .status{color:var(--muted)}
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      padding:26px 0 40px;
+      text-align:center;
+      font-size:.9rem;
+    }
+    .smallprint{font-size:.82rem;color:var(--muted);line-height:1.5}
+    @media(max-width:900px){
+      .stat{grid-column:span 6}
+      .wide,.side,.half{grid-column:1/-1}
+    }
+    @media(max-width:560px){
+      .stat{grid-column:1/-1}
+      .card{padding:16px}
+      th,td{padding:10px 7px;font-size:.9rem}
+      .hide-mobile{display:none}
+      h1{font-size:3.4rem}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">The Official Record Book of</div>
+      <h1>The Lads</h1>
+      <div class="seasonline">2021–Present</div>
+      <div class="subline">ESPN era · 2021–2025 &nbsp;•&nbsp; Sleeper era · 2026–Present</div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="wrap nav-inner">
+      <button class="tab active" data-page="hq">League HQ</button>
+      <button class="tab" data-page="standings">Career Standings</button>
+      <button class="tab" data-page="trophy">Trophy Room</button>
+      <button class="tab" data-page="seasons">Seasons</button>
+      <button class="tab" data-page="records">Record Book</button>
+      <button class="tab" data-page="hof">Hall of Fame</button>
+      <button class="tab" data-page="sportsbook">Sportsbook</button>
+      <button class="tab" data-page="sleeper">Sleeper Live</button>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="page active" id="hq">
+      <div class="section-kicker">The State of the League</div>
+      <h2>League HQ</h2>
+      <p class="lede">Five completed ESPN-era seasons are preserved here. Sleeper becomes the live source from 2026 onward.</p>
+
+      <div class="grid">
+        <div class="card stat">
+          <div class="label">Completed seasons</div>
+          <div class="value">5</div>
+          <div class="small">2021–2025</div>
+        </div>
+        <div class="card stat">
+          <div class="label">Career win% leader*</div>
+          <div class="value">67.9%</div>
+          <div class="small">Danesh · 38–18</div>
+        </div>
+        <div class="card stat">
+          <div class="label">Most career wins</div>
+          <div class="value">44</div>
+          <div class="small">Matt · Lamar You Ready</div>
+        </div>
+        <div class="card stat">
+          <div class="label">Most podiums</div>
+          <div class="value">3</div>
+          <div class="small">Danesh</div>
+        </div>
+
+        <div class="card wide">
+          <h3>Career Leaderboard</h3>
+          <table>
+            <thead><tr><th>#</th><th>Manager</th><th>Record</th><th>Win%</th><th class="hide-mobile">Seasons</th></tr></thead>
+            <tbody id="careerTop"></tbody>
+          </table>
+        </div>
+
+        <div class="card side">
+          <h3>League Records</h3>
+          <div class="record-list">
+            <div class="record-row"><span>Highest career win%*</span><span>Danesh · 67.9%</span></div>
+            <div class="record-row"><span>Most wins</span><span>Matt (Lamar) · 44</span></div>
+            <div class="record-row"><span>Most finals</span><span>Danesh / Anish · 2</span></div>
+            <div class="record-row"><span>Most podiums</span><span>Danesh · 3</span></div>
+            <div class="record-row"><span>Best season record</span><span>11–3</span></div>
+          </div>
+          <p class="smallprint">*Career win% leaderboard uses a 2-season minimum.</p>
+        </div>
+
+        <div class="card full">
+          <div class="note">
+            <strong>Identity rules locked in:</strong> AJ and Ajenth are the same manager. Brendan (MillerTime / Langley Freedom Fighters) is one manager; Brendan (FantaSeahawks) is a different manager. Matt (Lamar You Ready) is one manager; Matt (Busty Petite) is a different manager.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="standings">
+      <div class="section-kicker">The All-Time Ledger</div>
+      <h2>Career Standings</h2>
+      <p class="lede">Regular-season record across the historical seasons entered so far.</p>
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Manager</th><th>W</th><th>L</th><th>Win%</th><th>Seasons</th></tr>
+          </thead>
+          <tbody id="careerFull"></tbody>
+        </table>
+      </div>
+      <p class="smallprint">One-season managers are included in the full ledger, but the headline win% record uses a 2-season minimum.</p>
+    </section>
+
+    <section class="page" id="trophy">
+      <div class="section-kicker">Hardware</div>
+      <h2>Trophy Room</h2>
+      <p class="lede">Five seasons, five different champions.</p>
+      <div class="grid" id="champCards"></div>
+      <div class="grid" style="margin-top:18px">
+        <div class="card half">
+          <h3>Finals Appearances</h3>
+          <table>
+            <thead><tr><th>Manager</th><th>Finals</th><th>Titles</th><th>Runner-up</th></tr></thead>
+            <tbody>
+              <tr><td>Danesh</td><td>2</td><td>0</td><td>2</td></tr>
+              <tr><td>Anish</td><td>2</td><td>1</td><td>1</td></tr>
+              <tr><td>Brendan (Langley)</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>Corey</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>Marco</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>AJ (Ajenth)</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>Justen</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>Gavin</td><td>1</td><td>0</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card half">
+          <h3>Podium Finishes</h3>
+          <table>
+            <thead><tr><th>Manager</th><th>Podiums</th><th>🥇</th><th>🥈</th><th>🥉</th></tr></thead>
+            <tbody>
+              <tr><td>Danesh</td><td>3</td><td>0</td><td>2</td><td>1</td></tr>
+              <tr><td>Anish</td><td>2</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>Brendan (Langley)</td><td>2</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>Justen</td><td>2</td><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>Marco</td><td>2</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>Corey</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>AJ (Ajenth)</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>Gavin</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>Tristan</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="seasons">
+      <div class="section-kicker">Archive</div>
+      <h2>Season History</h2>
+      <p class="lede">The official champions and podiums preserved from the ESPN era.</p>
+      <div class="grid" id="seasonCards"></div>
+    </section>
+
+    <section class="page" id="records">
+      <div class="section-kicker">The Books</div>
+      <h2>Record Book</h2>
+      <p class="lede">Career marks and best seasons. Weekly scoring records can be added once the ESPN week-by-week data is imported.</p>
+      <div class="grid">
+        <div class="card half">
+          <h3>Career Records</h3>
+          <div class="record-list">
+            <div class="record-row"><span>Highest career win%*</span><span>Danesh · 67.86%</span></div>
+            <div class="record-row"><span>Most career wins</span><span>Matt (Lamar) · 44</span></div>
+            <div class="record-row"><span>Most finals appearances</span><span>Danesh / Anish · 2</span></div>
+            <div class="record-row"><span>Most podium finishes</span><span>Danesh · 3</span></div>
+            <div class="record-row"><span>Most championships</span><span>5-way tie · 1</span></div>
+          </div>
+        </div>
+        <div class="card half">
+          <h3>Best Regular Seasons</h3>
+          <div class="record-list">
+            <div class="record-row"><span>Danesh · 2021</span><span>11–3 (.786)</span></div>
+            <div class="record-row"><span>Matt (Lamar) · 2024</span><span>11–3 (.786)</span></div>
+            <div class="record-row"><span>Ryan · 2024</span><span>11–3 (.786)</span></div>
+            <div class="record-row"><span>10+ win seasons</span><span>Danesh / Matt / Brendan · 2 each</span></div>
+          </div>
+        </div>
+        <div class="card full">
+          <h3>Coming Next</h3>
+          <div class="record-list">
+            <div class="record-row"><span>Highest single-game score</span><span class="status">Needs weekly ESPN history</span></div>
+            <div class="record-row"><span>Lowest single-game score</span><span class="status">Needs weekly ESPN history</span></div>
+            <div class="record-row"><span>Biggest blowout</span><span class="status">Needs matchup history</span></div>
+            <div class="record-row"><span>Closest game</span><span class="status">Needs matchup history</span></div>
+            <div class="record-row"><span>Longest win streak</span><span class="status">Needs weekly results</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="hof">
+      <div class="section-kicker">Immortals</div>
+      <h2>Hall of Fame</h2>
+      <p class="lede">A simple first class based on titles, sustained winning, and repeated deep finishes.</p>
+      <div class="grid">
+        <div class="card stat"><div class="label">Career win% king*</div><div class="value">Danesh</div><div class="small">67.9% · 3 podiums</div></div>
+        <div class="card stat"><div class="label">Wins king</div><div class="value">Matt</div><div class="small">44 wins · Lamar You Ready</div></div>
+        <div class="card stat"><div class="label">Champion + elite rate</div><div class="value">Anish</div><div class="small">1 title · 61.4%</div></div>
+        <div class="card stat"><div class="label">Champion + longevity</div><div class="value">Brendan</div><div class="small">Langley / MillerTime · 40 wins</div></div>
+        <div class="card half">
+          <h3>Champions Wing</h3>
+          <p><span class="champ">2021</span> Anish</p>
+          <p><span class="champ">2022</span> Brendan (Langley)</p>
+          <p><span class="champ">2023</span> Corey</p>
+          <p><span class="champ">2024</span> Marco</p>
+          <p><span class="champ">2025</span> AJ (Ajenth)</p>
+        </div>
+        <div class="card half">
+          <h3>Historic Notes</h3>
+          <p>Danesh owns the best multi-season career win percentage currently recorded.</p>
+          <p>Matt (Lamar You Ready) owns the all-time wins lead.</p>
+          <p>No manager has repeated as champion through 2025.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="sportsbook">
+      <div class="section-kicker">For Fun Only</div>
+      <h2>Sportsbook</h2>
+      <p class="lede">Preseason manager odds are a league-entertainment feature, not real betting.</p>
+      <div class="card">
+        <h3>2026 Preseason Championship Odds</h3>
+        <p class="smallprint">This section is ready for the 16 current Sleeper managers once all roster-owner identities are loaded from Sleeper. For now, the model can be seeded from historical win%, points, consistency and titles.</p>
+        <div id="oddsPlaceholder" class="livebox">
+          Connect the full 2026 Sleeper manager list below, then the odds table can populate here.
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="sleeper">
+      <div class="section-kicker">2026 and Beyond</div>
+      <h2>Sleeper Live</h2>
+      <p class="lede">This page reads the public Sleeper API directly in your browser.</p>
+      <div class="grid">
+        <div class="card full">
+          <div class="livebox">
+            <strong>League ID:</strong> 1386156829708410880<br>
+            <span id="liveStatus" class="status">Loading current Sleeper league data…</span>
+          </div>
+        </div>
+        <div class="card full">
+          <h3>Current Sleeper Rosters</h3>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr><th>Roster</th><th>Manager</th><th>Team</th><th>Record</th></tr></thead>
+              <tbody id="sleeperTable"><tr><td colspan="4" class="status">Waiting for Sleeper…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="smallprint">If Sleeper changes its public API format in the future, the historical 2021–2025 data in this file still remains intact.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">The Lads Record Book · Historical core entered manually · Sleeper era reads from the public Sleeper API.</div>
+  </footer>
+
+  <script>
+    const career = [
+      {name:"Danesh", w:38, l:18, seasons:4},
+      {name:"Brendan (FantaSeahawks)", w:9, l:5, seasons:1},
+      {name:"Matt (Lamar You Ready)", w:44, l:26, seasons:5},
+      {name:"Anish", w:43, l:27, seasons:5},
+      {name:"Brendan (MillerTime / Langley)", w:40, l:30, seasons:5},
+      {name:"Marco", w:38, l:32, seasons:5},
+      {name:"Tristan", w:30, l:26, seasons:4},
+      {name:"AJ (Ajenth)", w:21, l:21, seasons:3},
+      {name:"John Urquhart", w:7, l:7, seasons:1},
+      {name:"Sailesh", w:7, l:7, seasons:1},
+      {name:"Ryan", w:34, l:36, seasons:5},
+      {name:"Justen", w:27, l:29, seasons:4},
+      {name:"Corey", w:20, l:22, seasons:3},
+      {name:"Manas", w:32, l:38, seasons:5},
+      {name:"Teddy", w:19, l:23, seasons:3},
+      {name:"Aidan", w:6, l:8, seasons:1},
+      {name:"Matt (Busty petite)", w:6, l:8, seasons:1},
+      {name:"Gavin", w:17, l:25, seasons:3},
+      {name:"Branden", w:22, l:34, seasons:4},
+      {name:"Callen", w:11, l:17, seasons:2},
+      {name:"Daniel", w:5, l:9, seasons:1},
+      {name:"Matt Landero", w:5, l:9, seasons:1},
+      {name:"Bodhi", w:4, l:10, seasons:1},
+      {name:"Yongiin", w:5, l:23, seasons:2}
+    ].map(x=>({...x,pct:x.w/(x.w+x.l)}));
+
+    const seasons = [
+      {year:2021, champ:"Anish", team:"Mecole makes me Hardman", record:"8–6", runner:"Danesh", third:"Brendan (MillerTime)"},
+      {year:2022, champ:"Brendan (Langley)", team:"Langley Freedom Fighters", record:"10–4", runner:"Justen", third:"Tristan"},
+      {year:2023, champ:"Corey", team:"DeMassage Watson", record:"9–5", runner:"Gavin", third:"Danesh"},
+      {year:2024, champ:"Marco", team:"Chasen It Down", record:"10–4", runner:"Anish", third:"Justen"},
+      {year:2025, champ:"AJ (Ajenth)", team:"Ryerson baddies", record:"10–4", runner:"Danesh", third:"Marco"}
+    ];
+
+    function pct(x){return (x*100).toFixed(1)+"%"}
+    function renderCareer(){
+      const sorted = [...career].sort((a,b)=>b.pct-a.pct || b.w-a.w);
+      document.getElementById("careerFull").innerHTML = sorted.map((x,i)=>`
+        <tr>
+          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.w}</td><td>${x.l}</td><td>${pct(x.pct)}</td><td>${x.seasons}</td>
+        </tr>`).join("");
+
+      const qualified = [...career].filter(x=>x.seasons>=2).sort((a,b)=>b.pct-a.pct || b.w-a.w).slice(0,10);
+      document.getElementById("careerTop").innerHTML = qualified.map((x,i)=>`
+        <tr>
+          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.w}–${x.l}</td><td>${pct(x.pct)}</td><td class="hide-mobile">${x.seasons}</td>
+        </tr>`).join("");
+    }
+
+    function renderSeasons(){
+      document.getElementById("seasonCards").innerHTML = seasons.map(s=>`
+        <div class="card half season-card">
+          <div>
+            <div class="section-kicker">${s.year} Champion</div>
+            <strong>${s.champ}</strong>
+            <div class="season-meta">${s.team} · ${s.record}</div>
+            <div class="season-meta">🥈 ${s.runner} &nbsp; · &nbsp; 🥉 ${s.third}</div>
+          </div>
+          <div class="trophy">🏆</div>
+        </div>`).join("");
+      document.getElementById("champCards").innerHTML = seasons.map(s=>`
+        <div class="card stat">
+          <div class="label">${s.year}</div>
+          <div class="value" style="font-size:1.3rem">${s.champ}</div>
+          <div class="small">${s.team}</div>
+        </div>`).join("");
+    }
+
+    document.querySelectorAll(".tab").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+        document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.page).classList.add("active");
+        window.scrollTo({top:0,behavior:"smooth"});
+      });
+    });
+
+    async function loadSleeper(){
+      const leagueId = "1386156829708410880";
+      const base = "https://api.sleeper.app/v1";
+      const status = document.getElementById("liveStatus");
+      const tbody = document.getElementById("sleeperTable");
+      try{
+        const [leagueRes, usersRes, rostersRes] = await Promise.all([
+          fetch(`${base}/league/${leagueId}`),
+          fetch(`${base}/league/${leagueId}/users`),
+          fetch(`${base}/league/${leagueId}/rosters`)
+        ]);
+        if(!leagueRes.ok || !usersRes.ok || !rostersRes.ok) throw new Error("Sleeper request failed");
+        const [league, users, rosters] = await Promise.all([leagueRes.json(), usersRes.json(), rostersRes.json()]);
+        const byId = Object.fromEntries(users.map(u=>[u.user_id,u]));
+        status.textContent = `${league.name || "The Lads"} · ${users.length} managers found · season ${league.season || "2026"}`;
+        tbody.innerHTML = rosters
+          .sort((a,b)=>a.roster_id-b.roster_id)
+          .map(r=>{
+            const u = byId[r.owner_id] || {};
+            const meta = u.metadata || {};
+            const settings = r.settings || {};
+            const wins = settings.wins ?? 0;
+            const losses = settings.losses ?? 0;
+            return `<tr>
+              <td>${r.roster_id}</td>
+              <td>${u.display_name || "Unassigned"}</td>
+              <td>${meta.team_name || meta.team_name_update || "—"}</td>
+              <td>${wins}–${losses}</td>
+            </tr>`;
+          }).join("") || `<tr><td colspan="4" class="status">No rosters returned yet.</td></tr>`;
+      }catch(err){
+        status.textContent = "Could not load Sleeper live data right now. The historical record book still works normally.";
+        tbody.innerHTML = `<tr><td colspan="4" class="status">Sleeper live connection unavailable.</td></tr>`;
+      }
+    }
+
+    renderCareer();
+    renderSeasons();
+    loadSleeper();
+  </script>
+</body>
+</html>
