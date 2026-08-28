@@ -214,7 +214,7 @@
   <nav>
     <div class="wrap nav-inner">
       <button class="tab active" data-page="hq">League HQ</button>
-      <button class="tab" data-page="standings">Career Standings</button>
+      <button class="tab" data-page="standings">Career Leaderboard</button>
       <button class="tab" data-page="trophy">Trophy Room</button>
       <button class="tab" data-page="seasons">Seasons</button>
       <button class="tab" data-page="records">Record Book</button>
@@ -258,6 +258,7 @@
 
         <div class="card wide">
           <h3>Career Leaderboard</h3>
+          <p class="smallprint">Top qualified managers shown here. Tap “Career Leaderboard” above for the complete all-time table.</p>
           <table>
             <thead><tr><th>#</th><th>Manager</th><th>Titles</th><th>Record</th><th>Win%</th><th class="hide-mobile">Seasons</th></tr></thead>
             <tbody id="careerTop"></tbody>
@@ -280,7 +281,7 @@
 
     <section class="page" id="standings">
       <div class="section-kicker">The All-Time Ledger</div>
-      <h2>Career Standings</h2>
+      <h2>Career Leaderboard</h2>
       <p class="lede">Regular-season record across the historical seasons entered so far.</p>
       <div class="card">
         <table>
@@ -542,7 +543,6 @@
         window.scrollTo({top:0,behavior:"smooth"});
       });
     });
-    }
 
     renderCareer();
     renderSeasons();
