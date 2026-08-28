@@ -207,7 +207,7 @@
       <div class="eyebrow">The Official Record Book of</div>
       <h1>The Lads</h1>
       <div class="seasonline">2021–Present</div>
-      <div class="subline">ESPN era · 2021–2025 &nbsp;•&nbsp; Sleeper era · 2026–Present</div>
+      <div class="subline">NFL Fantasy era · 2021–2025 &nbsp;•&nbsp; Sleeper era · 2026–Present</div>
     </div>
   </header>
 
@@ -219,8 +219,7 @@
       <button class="tab" data-page="seasons">Seasons</button>
       <button class="tab" data-page="records">Record Book</button>
       <button class="tab" data-page="hof">Hall of Fame</button>
-      <button class="tab" data-page="sportsbook">Sportsbook</button>
-      <button class="tab" data-page="sleeper">Sleeper Live</button>
+      <button class="tab" data-page="nfl-era">NFL Fantasy Era</button>
     </div>
   </nav>
 
@@ -228,7 +227,7 @@
     <section class="page active" id="hq">
       <div class="section-kicker">The State of the League</div>
       <h2>League HQ</h2>
-      <p class="lede">Five completed ESPN-era seasons are preserved here. Sleeper becomes the live source from 2026 onward.</p>
+      <p class="lede">Five completed NFL Fantasy-era seasons are preserved here, with Sleeper continuing the league from 2026 onward.</p>
 
       <div class="grid">
         <div class="card stat">
@@ -247,6 +246,11 @@
           <div class="small">Matt · Lamar You Ready</div>
         </div>
         <div class="card stat">
+          <div class="label">Most championships</div>
+          <div class="value">1</div>
+          <div class="small">5-way tie</div>
+        </div>
+        <div class="card stat">
           <div class="label">Most podiums</div>
           <div class="value">3</div>
           <div class="small">Danesh</div>
@@ -255,7 +259,7 @@
         <div class="card wide">
           <h3>Career Leaderboard</h3>
           <table>
-            <thead><tr><th>#</th><th>Manager</th><th>Record</th><th>Win%</th><th class="hide-mobile">Seasons</th></tr></thead>
+            <thead><tr><th>#</th><th>Manager</th><th>Titles</th><th>Record</th><th>Win%</th><th class="hide-mobile">Seasons</th></tr></thead>
             <tbody id="careerTop"></tbody>
           </table>
         </div>
@@ -264,18 +268,12 @@
           <h3>League Records</h3>
           <div class="record-list">
             <div class="record-row"><span>Highest career win%*</span><span>Danesh · 67.9%</span></div>
-            <div class="record-row"><span>Most wins</span><span>Matt (Lamar) · 44</span></div>
+            <div class="record-row"><span>Most wins</span><span>Matt Lee · 44</span></div>
             <div class="record-row"><span>Most finals</span><span>Danesh / Anish · 2</span></div>
             <div class="record-row"><span>Most podiums</span><span>Danesh · 3</span></div>
             <div class="record-row"><span>Best season record</span><span>11–3</span></div>
           </div>
           <p class="smallprint">*Career win% leaderboard uses a 2-season minimum.</p>
-        </div>
-
-        <div class="card full">
-          <div class="note">
-            <strong>Identity rules locked in:</strong> AJ and Ajenth are the same manager. Brendan (MillerTime / Langley Freedom Fighters) is one manager; Brendan (FantaSeahawks) is a different manager. Matt (Lamar You Ready) is one manager; Matt (Busty Petite) is a different manager.
-          </div>
         </div>
       </div>
     </section>
@@ -287,7 +285,7 @@
       <div class="card">
         <table>
           <thead>
-            <tr><th>#</th><th>Manager</th><th>W</th><th>L</th><th>Win%</th><th>Seasons</th></tr>
+            <tr><th>#</th><th>Manager</th><th>Titles</th><th>W</th><th>L</th><th>Win%</th><th>Seasons</th></tr>
           </thead>
           <tbody id="careerFull"></tbody>
         </table>
@@ -311,7 +309,7 @@
               <tr><td>Brendan (Langley)</td><td>1</td><td>1</td><td>0</td></tr>
               <tr><td>Corey</td><td>1</td><td>1</td><td>0</td></tr>
               <tr><td>Marco</td><td>1</td><td>1</td><td>0</td></tr>
-              <tr><td>AJ (Ajenth)</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>Ajenth</td><td>1</td><td>1</td><td>0</td></tr>
               <tr><td>Justen</td><td>1</td><td>0</td><td>1</td></tr>
               <tr><td>Gavin</td><td>1</td><td>0</td><td>1</td></tr>
             </tbody>
@@ -328,7 +326,7 @@
               <tr><td>Justen</td><td>2</td><td>0</td><td>1</td><td>1</td></tr>
               <tr><td>Marco</td><td>2</td><td>1</td><td>0</td><td>1</td></tr>
               <tr><td>Corey</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
-              <tr><td>AJ (Ajenth)</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>Ajenth</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
               <tr><td>Gavin</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
               <tr><td>Tristan</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
             </tbody>
@@ -340,20 +338,20 @@
     <section class="page" id="seasons">
       <div class="section-kicker">Archive</div>
       <h2>Season History</h2>
-      <p class="lede">The official champions and podiums preserved from the ESPN era.</p>
+      <p class="lede">The official champions and podiums preserved from the NFL Fantasy era.</p>
       <div class="grid" id="seasonCards"></div>
     </section>
 
     <section class="page" id="records">
       <div class="section-kicker">The Books</div>
       <h2>Record Book</h2>
-      <p class="lede">Career marks and best seasons. Weekly scoring records can be added once the ESPN week-by-week data is imported.</p>
+      <p class="lede">Career marks, championships, and the best verified scoring performances from the NFL Fantasy era.</p>
       <div class="grid">
         <div class="card half">
           <h3>Career Records</h3>
           <div class="record-list">
             <div class="record-row"><span>Highest career win%*</span><span>Danesh · 67.86%</span></div>
-            <div class="record-row"><span>Most career wins</span><span>Matt (Lamar) · 44</span></div>
+            <div class="record-row"><span>Most career wins</span><span>Matt Lee · 44</span></div>
             <div class="record-row"><span>Most finals appearances</span><span>Danesh / Anish · 2</span></div>
             <div class="record-row"><span>Most podium finishes</span><span>Danesh · 3</span></div>
             <div class="record-row"><span>Most championships</span><span>5-way tie · 1</span></div>
@@ -363,19 +361,41 @@
           <h3>Best Regular Seasons</h3>
           <div class="record-list">
             <div class="record-row"><span>Danesh · 2021</span><span>11–3 (.786)</span></div>
-            <div class="record-row"><span>Matt (Lamar) · 2024</span><span>11–3 (.786)</span></div>
+            <div class="record-row"><span>Matt Lee · 2024</span><span>11–3 (.786)</span></div>
             <div class="record-row"><span>Ryan · 2024</span><span>11–3 (.786)</span></div>
-            <div class="record-row"><span>10+ win seasons</span><span>Danesh / Matt / Brendan · 2 each</span></div>
+            <div class="record-row"><span>10+ win seasons</span><span>Danesh / Matt Lee / Brendan · 2 each</span></div>
           </div>
         </div>
         <div class="card full">
-          <h3>Coming Next</h3>
-          <div class="record-list">
-            <div class="record-row"><span>Highest single-game score</span><span class="status">Needs weekly ESPN history</span></div>
-            <div class="record-row"><span>Lowest single-game score</span><span class="status">Needs weekly ESPN history</span></div>
-            <div class="record-row"><span>Biggest blowout</span><span class="status">Needs matchup history</span></div>
-            <div class="record-row"><span>Closest game</span><span class="status">Needs matchup history</span></div>
-            <div class="record-row"><span>Longest win streak</span><span class="status">Needs weekly results</span></div>
+          <h3>NFL Fantasy Era Scoring Records</h3>
+          <p class="smallprint">Verified from the historical Hall of Fame records. Team names that were not appropriate for the official archive are shown by manager name instead.</p>
+          <div class="grid" style="margin-top:12px">
+            <div class="card half">
+              <h3 style="font-size:1.2rem">Highest Weekly Team Score by Season</h3>
+              <table>
+                <thead><tr><th>Year</th><th>Team / Manager</th><th>Week</th><th>Points</th></tr></thead>
+                <tbody>
+                  <tr><td>2025</td><td>The Wolves</td><td>9</td><td>173.40</td></tr>
+                  <tr><td>2024</td><td>Chasen It Down</td><td>17</td><td>180.58</td></tr>
+                  <tr><td>2023</td><td>Lamar You Ready</td><td>17</td><td>185.14</td></tr>
+                  <tr><td>2022</td><td>Rye High</td><td>11</td><td>166.76</td></tr>
+                  <tr><td>2021</td><td>Mayfield of Dreams</td><td>14</td><td>211.18</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card half">
+              <h3 style="font-size:1.2rem">Most Team Points in a Season</h3>
+              <table>
+                <thead><tr><th>Year</th><th>Team / Manager</th><th>Points</th></tr></thead>
+                <tbody>
+                  <tr><td>2025</td><td>Ajenth</td><td>1714.64</td></tr>
+                  <tr><td>2024</td><td>Chasen It Down</td><td>1739.16</td></tr>
+                  <tr><td>2023</td><td>Corey</td><td>1748.24</td></tr>
+                  <tr><td>2022</td><td>Rye High</td><td>1675.66</td></tr>
+                  <tr><td>2021</td><td>Lamar You Ready</td><td>1878.76</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -387,7 +407,7 @@
       <p class="lede">A simple first class based on titles, sustained winning, and repeated deep finishes.</p>
       <div class="grid">
         <div class="card stat"><div class="label">Career win% king*</div><div class="value">Danesh</div><div class="small">67.9% · 3 podiums</div></div>
-        <div class="card stat"><div class="label">Wins king</div><div class="value">Matt</div><div class="small">44 wins · Lamar You Ready</div></div>
+        <div class="card stat"><div class="label">Wins king</div><div class="value">Matt Lee</div><div class="small">44 career wins</div></div>
         <div class="card stat"><div class="label">Champion + elite rate</div><div class="value">Anish</div><div class="small">1 title · 61.4%</div></div>
         <div class="card stat"><div class="label">Champion + longevity</div><div class="value">Brendan</div><div class="small">Langley / MillerTime · 40 wins</div></div>
         <div class="card half">
@@ -396,93 +416,87 @@
           <p><span class="champ">2022</span> Brendan (Langley)</p>
           <p><span class="champ">2023</span> Corey</p>
           <p><span class="champ">2024</span> Marco</p>
-          <p><span class="champ">2025</span> AJ (Ajenth)</p>
+          <p><span class="champ">2025</span> Ajenth</p>
         </div>
         <div class="card half">
           <h3>Historic Notes</h3>
           <p>Danesh owns the best multi-season career win percentage currently recorded.</p>
-          <p>Matt (Lamar You Ready) owns the all-time wins lead.</p>
+          <p>Matt Lee owns the all-time wins lead.</p>
           <p>No manager has repeated as champion through 2025.</p>
         </div>
       </div>
     </section>
 
-    <section class="page" id="sportsbook">
-      <div class="section-kicker">For Fun Only</div>
-      <h2>Sportsbook</h2>
-      <p class="lede">Preseason manager odds are a league-entertainment feature, not real betting.</p>
-      <div class="card">
-        <h3>2026 Preseason Championship Odds</h3>
-        <p class="smallprint">This section is ready for the 16 current Sleeper managers once all roster-owner identities are loaded from Sleeper. For now, the model can be seeded from historical win%, points, consistency and titles.</p>
-        <div id="oddsPlaceholder" class="livebox">
-          Connect the full 2026 Sleeper manager list below, then the odds table can populate here.
-        </div>
-      </div>
-    </section>
-
-    <section class="page" id="sleeper">
-      <div class="section-kicker">2026 and Beyond</div>
-      <h2>Sleeper Live</h2>
-      <p class="lede">This page reads the public Sleeper API directly in your browser.</p>
+    <section class="page" id="nfl-era">
+      <div class="section-kicker">2021–2025</div>
+      <h2>NFL Fantasy Era</h2>
+      <p class="lede">The first five seasons of The Lads, preserved as the foundation of the all-time record book.</p>
       <div class="grid">
-        <div class="card full">
-          <div class="livebox">
-            <strong>League ID:</strong> 1386156829708410880<br>
-            <span id="liveStatus" class="status">Loading current Sleeper league data…</span>
-          </div>
+        <div class="card half">
+          <h3>Era Champions</h3>
+          <table>
+            <thead><tr><th>Year</th><th>Champion</th><th>Record</th></tr></thead>
+            <tbody>
+              <tr><td>2021</td><td>Anish</td><td>8–6</td></tr>
+              <tr><td>2022</td><td>Brendan (Langley)</td><td>10–4</td></tr>
+              <tr><td>2023</td><td>Corey</td><td>9–5</td></tr>
+              <tr><td>2024</td><td>Marco</td><td>10–4</td></tr>
+              <tr><td>2025</td><td>Ajenth</td><td>10–4</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="card full">
-          <h3>Current Sleeper Rosters</h3>
-          <div style="overflow-x:auto">
-            <table>
-              <thead><tr><th>Roster</th><th>Manager</th><th>Team</th><th>Record</th></tr></thead>
-              <tbody id="sleeperTable"><tr><td colspan="4" class="status">Waiting for Sleeper…</td></tr></tbody>
-            </table>
+        <div class="card half">
+          <h3>Era Notes</h3>
+          <div class="record-list">
+            <div class="record-row"><span>Seasons</span><span>5</span></div>
+            <div class="record-row"><span>Different champions</span><span>5</span></div>
+            <div class="record-row"><span>Best regular-season record</span><span>11–3</span></div>
+            <div class="record-row"><span>Highest weekly score shown</span><span>211.18</span></div>
+            <div class="record-row"><span>Highest season points shown</span><span>1878.76</span></div>
           </div>
         </div>
       </div>
-      <p class="smallprint">If Sleeper changes its public API format in the future, the historical 2021–2025 data in this file still remains intact.</p>
     </section>
   </main>
 
   <footer>
-    <div class="wrap">The Lads Record Book · Historical core entered manually · Sleeper era reads from the public Sleeper API.</div>
+    <div class="wrap">The Lads Record Book · NFL Fantasy era preserved from 2021–2025 · Sleeper era begins in 2026.</div>
   </footer>
 
   <script>
     const career = [
-      {name:"Danesh", w:38, l:18, seasons:4},
-      {name:"Brendan (FantaSeahawks)", w:9, l:5, seasons:1},
-      {name:"Matt (Lamar You Ready)", w:44, l:26, seasons:5},
-      {name:"Anish", w:43, l:27, seasons:5},
-      {name:"Brendan (MillerTime / Langley)", w:40, l:30, seasons:5},
-      {name:"Marco", w:38, l:32, seasons:5},
-      {name:"Tristan", w:30, l:26, seasons:4},
-      {name:"AJ (Ajenth)", w:21, l:21, seasons:3},
-      {name:"John Urquhart", w:7, l:7, seasons:1},
-      {name:"Sailesh", w:7, l:7, seasons:1},
-      {name:"Ryan", w:34, l:36, seasons:5},
-      {name:"Justen", w:27, l:29, seasons:4},
-      {name:"Corey", w:20, l:22, seasons:3},
-      {name:"Manas", w:32, l:38, seasons:5},
-      {name:"Teddy", w:19, l:23, seasons:3},
-      {name:"Aidan", w:6, l:8, seasons:1},
-      {name:"Matt (Busty petite)", w:6, l:8, seasons:1},
-      {name:"Gavin", w:17, l:25, seasons:3},
-      {name:"Branden", w:22, l:34, seasons:4},
-      {name:"Callen", w:11, l:17, seasons:2},
-      {name:"Daniel", w:5, l:9, seasons:1},
-      {name:"Matt Landero", w:5, l:9, seasons:1},
-      {name:"Bodhi", w:4, l:10, seasons:1},
-      {name:"Yongiin", w:5, l:23, seasons:2}
+      {name:"Danesh", w:38, l:18, seasons:4, titles:0},
+      {name:"Brendan (FantaSeahawks)", w:9, l:5, seasons:1, titles:0},
+      {name:"Matt Lee", w:44, l:26, seasons:5, titles:0},
+      {name:"Anish", w:43, l:27, seasons:5, titles:1},
+      {name:"Brendan (MillerTime / Langley)", w:40, l:30, seasons:5, titles:1},
+      {name:"Marco", w:38, l:32, seasons:5, titles:1},
+      {name:"Tristan", w:30, l:26, seasons:4, titles:0},
+      {name:"Ajenth", w:21, l:21, seasons:3, titles:1},
+      {name:"John Urquhart", w:7, l:7, seasons:1, titles:0},
+      {name:"Sailesh", w:7, l:7, seasons:1, titles:0},
+      {name:"Ryan", w:34, l:36, seasons:5, titles:0},
+      {name:"Justen", w:27, l:29, seasons:4, titles:0},
+      {name:"Corey", w:20, l:22, seasons:3, titles:1},
+      {name:"Manas", w:32, l:38, seasons:5, titles:0},
+      {name:"Teddy", w:19, l:23, seasons:3, titles:0},
+      {name:"Aidan", w:6, l:8, seasons:1, titles:0},
+      {name:"Matt R", w:6, l:8, seasons:1, titles:0},
+      {name:"Gavin", w:17, l:25, seasons:3, titles:0},
+      {name:"Branden", w:22, l:34, seasons:4, titles:0},
+      {name:"Callen", w:11, l:17, seasons:2, titles:0},
+      {name:"Daniel", w:5, l:9, seasons:1, titles:0},
+      {name:"Matt Landero", w:5, l:9, seasons:1, titles:0},
+      {name:"Bodhi", w:4, l:10, seasons:1, titles:0},
+      {name:"Yongiin", w:5, l:23, seasons:2, titles:0}
     ].map(x=>({...x,pct:x.w/(x.w+x.l)}));
 
     const seasons = [
-      {year:2021, champ:"Anish", team:"Mecole makes me Hardman", record:"8–6", runner:"Danesh", third:"Brendan (MillerTime)"},
+      {year:2021, champ:"Anish", team:"", record:"8–6", runner:"Danesh", third:"Brendan (MillerTime)"},
       {year:2022, champ:"Brendan (Langley)", team:"Langley Freedom Fighters", record:"10–4", runner:"Justen", third:"Tristan"},
-      {year:2023, champ:"Corey", team:"DeMassage Watson", record:"9–5", runner:"Gavin", third:"Danesh"},
+      {year:2023, champ:"Corey", team:"", record:"9–5", runner:"Gavin", third:"Danesh"},
       {year:2024, champ:"Marco", team:"Chasen It Down", record:"10–4", runner:"Anish", third:"Justen"},
-      {year:2025, champ:"AJ (Ajenth)", team:"Ryerson baddies", record:"10–4", runner:"Danesh", third:"Marco"}
+      {year:2025, champ:"Ajenth", team:"", record:"10–4", runner:"Danesh", third:"Marco"}
     ];
 
     function pct(x){return (x*100).toFixed(1)+"%"}
@@ -490,13 +504,13 @@
       const sorted = [...career].sort((a,b)=>b.pct-a.pct || b.w-a.w);
       document.getElementById("careerFull").innerHTML = sorted.map((x,i)=>`
         <tr>
-          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.w}</td><td>${x.l}</td><td>${pct(x.pct)}</td><td>${x.seasons}</td>
+          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.titles}</td><td>${x.w}</td><td>${x.l}</td><td>${pct(x.pct)}</td><td>${x.seasons}</td>
         </tr>`).join("");
 
       const qualified = [...career].filter(x=>x.seasons>=2).sort((a,b)=>b.pct-a.pct || b.w-a.w).slice(0,10);
       document.getElementById("careerTop").innerHTML = qualified.map((x,i)=>`
         <tr>
-          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.w}–${x.l}</td><td>${pct(x.pct)}</td><td class="hide-mobile">${x.seasons}</td>
+          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.titles}</td><td>${x.w}–${x.l}</td><td>${pct(x.pct)}</td><td class="hide-mobile">${x.seasons}</td>
         </tr>`).join("");
     }
 
@@ -506,7 +520,7 @@
           <div>
             <div class="section-kicker">${s.year} Champion</div>
             <strong>${s.champ}</strong>
-            <div class="season-meta">${s.team} · ${s.record}</div>
+            <div class="season-meta">${s.team ? `${s.team} · ${s.record}` : s.record}</div>
             <div class="season-meta">🥈 ${s.runner} &nbsp; · &nbsp; 🥉 ${s.third}</div>
           </div>
           <div class="trophy">🏆</div>
@@ -515,7 +529,7 @@
         <div class="card stat">
           <div class="label">${s.year}</div>
           <div class="value" style="font-size:1.3rem">${s.champ}</div>
-          <div class="small">${s.team}</div>
+          <div class="small">${s.team || s.record}</div>
         </div>`).join("");
     }
 
@@ -528,46 +542,10 @@
         window.scrollTo({top:0,behavior:"smooth"});
       });
     });
-
-    async function loadSleeper(){
-      const leagueId = "1386156829708410880";
-      const base = "https://api.sleeper.app/v1";
-      const status = document.getElementById("liveStatus");
-      const tbody = document.getElementById("sleeperTable");
-      try{
-        const [leagueRes, usersRes, rostersRes] = await Promise.all([
-          fetch(`${base}/league/${leagueId}`),
-          fetch(`${base}/league/${leagueId}/users`),
-          fetch(`${base}/league/${leagueId}/rosters`)
-        ]);
-        if(!leagueRes.ok || !usersRes.ok || !rostersRes.ok) throw new Error("Sleeper request failed");
-        const [league, users, rosters] = await Promise.all([leagueRes.json(), usersRes.json(), rostersRes.json()]);
-        const byId = Object.fromEntries(users.map(u=>[u.user_id,u]));
-        status.textContent = `${league.name || "The Lads"} · ${users.length} managers found · season ${league.season || "2026"}`;
-        tbody.innerHTML = rosters
-          .sort((a,b)=>a.roster_id-b.roster_id)
-          .map(r=>{
-            const u = byId[r.owner_id] || {};
-            const meta = u.metadata || {};
-            const settings = r.settings || {};
-            const wins = settings.wins ?? 0;
-            const losses = settings.losses ?? 0;
-            return `<tr>
-              <td>${r.roster_id}</td>
-              <td>${u.display_name || "Unassigned"}</td>
-              <td>${meta.team_name || meta.team_name_update || "—"}</td>
-              <td>${wins}–${losses}</td>
-            </tr>`;
-          }).join("") || `<tr><td colspan="4" class="status">No rosters returned yet.</td></tr>`;
-      }catch(err){
-        status.textContent = "Could not load Sleeper live data right now. The historical record book still works normally.";
-        tbody.innerHTML = `<tr><td colspan="4" class="status">Sleeper live connection unavailable.</td></tr>`;
-      }
     }
 
     renderCareer();
     renderSeasons();
-    loadSleeper();
   </script>
 </body>
 </html>
