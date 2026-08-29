@@ -199,7 +199,34 @@
       .hide-mobile{display:none}
       h1{font-size:3.4rem}
     }
-  </style>
+  
+    @media(min-width:901px){
+      #hq .dashboard{grid-template-columns:minmax(250px,.55fr) minmax(0,1.45fr)}
+      #hq .dashboard .card{min-width:0}
+    }
+
+  
+    /* HQ: compact Most Podiums card + wide Career Leaderboard */
+    @media (min-width: 901px) {
+      #hq .hero-grid,
+      #hq .hq-grid,
+      #hq .two-col,
+      #hq .grid-2 {
+        grid-template-columns: 260px minmax(0, 1fr) !important;
+        align-items: stretch;
+      }
+    }
+
+
+    @media (min-width: 901px) {
+      #hq .podium-career-row {
+        display: grid !important;
+        grid-template-columns: 260px minmax(0, 1fr) !important;
+        gap: 18px !important;
+        align-items: stretch;
+      }
+    }
+</style>
 </head>
 <body>
   <header>
@@ -307,7 +334,7 @@
             <tbody>
               <tr><td>Danesh</td><td>2</td><td>0</td><td>2</td></tr>
               <tr><td>Anish</td><td>2</td><td>1</td><td>1</td></tr>
-              <tr><td>Brendan (Langley)</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>Brendan Lee</td><td>1</td><td>1</td><td>0</td></tr>
               <tr><td>Corey</td><td>1</td><td>1</td><td>0</td></tr>
               <tr><td>Marco</td><td>1</td><td>1</td><td>0</td></tr>
               <tr><td>Ajenth</td><td>1</td><td>1</td><td>0</td></tr>
@@ -323,7 +350,7 @@
             <tbody>
               <tr><td>Danesh</td><td>3</td><td>0</td><td>2</td><td>1</td></tr>
               <tr><td>Anish</td><td>2</td><td>1</td><td>1</td><td>0</td></tr>
-              <tr><td>Brendan (Langley)</td><td>2</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>Brendan Lee</td><td>2</td><td>1</td><td>0</td><td>1</td></tr>
               <tr><td>Justen</td><td>2</td><td>0</td><td>1</td><td>1</td></tr>
               <tr><td>Marco</td><td>2</td><td>1</td><td>0</td><td>1</td></tr>
               <tr><td>Corey</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
@@ -410,11 +437,11 @@
         <div class="card stat"><div class="label">Career win% king*</div><div class="value">Danesh</div><div class="small">67.9% · 3 podiums</div></div>
         <div class="card stat"><div class="label">Wins king</div><div class="value">Matt Lee</div><div class="small">44 career wins</div></div>
         <div class="card stat"><div class="label">Champion + elite rate</div><div class="value">Anish</div><div class="small">1 title · 61.4%</div></div>
-        <div class="card stat"><div class="label">Champion + longevity</div><div class="value">Brendan</div><div class="small">Langley / MillerTime · 40 wins</div></div>
+        <div class="card stat"><div class="label">Champion + longevity</div><div class="value">Brendan</div><div class="small">Brendan Lee · 40 wins</div></div>
         <div class="card half">
           <h3>Champions Wing</h3>
           <p><span class="champ">2021</span> Anish</p>
-          <p><span class="champ">2022</span> Brendan (Langley)</p>
+          <p><span class="champ">2022</span> Brendan Lee</p>
           <p><span class="champ">2023</span> Corey</p>
           <p><span class="champ">2024</span> Marco</p>
           <p><span class="champ">2025</span> Ajenth</p>
@@ -439,7 +466,7 @@
             <thead><tr><th>Year</th><th>Champion</th><th>Record</th></tr></thead>
             <tbody>
               <tr><td>2021</td><td>Anish</td><td>8–6</td></tr>
-              <tr><td>2022</td><td>Brendan (Langley)</td><td>10–4</td></tr>
+              <tr><td>2022</td><td>Brendan Lee</td><td>10–4</td></tr>
               <tr><td>2023</td><td>Corey</td><td>9–5</td></tr>
               <tr><td>2024</td><td>Marco</td><td>10–4</td></tr>
               <tr><td>2025</td><td>Ajenth</td><td>10–4</td></tr>
@@ -470,7 +497,7 @@
       {name:"Brendan (FantaSeahawks)", w:9, l:5, seasons:1, titles:0},
       {name:"Matt Lee", w:44, l:26, seasons:5, titles:0},
       {name:"Anish", w:43, l:27, seasons:5, titles:1},
-      {name:"Brendan (MillerTime / Langley)", w:40, l:30, seasons:5, titles:1},
+      {name:"Brendan Lee", w:40, l:30, seasons:5, titles:1},
       {name:"Marco", w:38, l:32, seasons:5, titles:1},
       {name:"Tristan", w:30, l:26, seasons:4, titles:0},
       {name:"Ajenth", w:21, l:21, seasons:3, titles:1},
@@ -493,8 +520,8 @@
     ].map(x=>({...x,pct:x.w/(x.w+x.l)}));
 
     const seasons = [
-      {year:2021, champ:"Anish", team:"", record:"8–6", runner:"Danesh", third:"Brendan (MillerTime)"},
-      {year:2022, champ:"Brendan (Langley)", team:"Langley Freedom Fighters", record:"10–4", runner:"Justen", third:"Tristan"},
+      {year:2021, champ:"Anish", team:"", record:"8–6", runner:"Danesh", third:"Brendan Lee"},
+      {year:2022, champ:"Brendan Lee", team:"Langley Freedom Fighters", record:"10–4", runner:"Justen", third:"Tristan"},
       {year:2023, champ:"Corey", team:"", record:"9–5", runner:"Gavin", third:"Danesh"},
       {year:2024, champ:"Marco", team:"Chasen It Down", record:"10–4", runner:"Anish", third:"Justen"},
       {year:2025, champ:"Ajenth", team:"", record:"10–4", runner:"Danesh", third:"Marco"}
@@ -530,7 +557,7 @@
         <div class="card stat">
           <div class="label">${s.year}</div>
           <div class="value" style="font-size:1.3rem">${s.champ}</div>
-          <div class="small">${s.team || s.record}</div>
+          <div class="podium-career-row small">${s.team || s.record}</div>
         </div>`).join("");
     }
 
