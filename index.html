@@ -232,24 +232,27 @@
     .year-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
     .playoff-row{background:rgba(139,47,43,.06)}
 
+
+  
+    /* League HQ desktop layout: three cards per row, then leaderboard + records */
     @media (min-width: 901px) {
-      #hq .playoff-hq-card {
-        grid-column: 1 / span 3;
+      #hq > .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+      }
+      #hq > .grid > .stat {
+        grid-column: span 1;
+      }
+      #hq > .grid > .wide {
+        grid-column: span 2;
+      }
+      #hq > .grid > .side {
+        grid-column: span 1;
       }
     }
 
   </style>
 
-<style>
-@media (min-width: 901px) {
-  #hq .champ-career-row {
-    display: grid !important;
-    grid-template-columns: 185px minmax(0, 1fr) !important;
-    gap: 18px !important;
-    align-items: stretch !important;
-  }
-}
-</style>
 
 </head>
 <body>
