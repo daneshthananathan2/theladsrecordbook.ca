@@ -251,6 +251,9 @@
       }
     }
 
+  
+    .champ-mark{font-size:.78em;vertical-align:.08em;margin-left:5px}
+
   </style>
 
 
@@ -398,7 +401,7 @@
     <section class="page" id="seasons">
       <div class="section-kicker">Archive</div>
       <h2>Season History</h2>
-      <p class="lede">The official regular-season standings before the playoffs, plus each season’s champion and podium.</p>
+      <p class="lede">Each season in official regular-season order before the playoffs. A small 🏆 marks the eventual champion.</p>
       <div class="year-tabs" id="yearTabs"></div>
       <div class="card full" id="seasonStandings" style="margin-bottom:18px"></div>
       <div class="grid" id="seasonCards"></div>
@@ -563,7 +566,7 @@
     ];
 
 
-    const finalStandings = {
+    const regularSeasonStandings = {
       2021:[
         ["Anish","8–6"],["Danesh","11–3"],["Brendan Lee","9–5"],["Matt Lee","10–4"],["Brendan Sadhra","9–5"],["Branden","9–5"],
         ["Manas","6–8"],["Marco","7–7"],["Ryan","4–10"],["Yongjin","2–12"],["Daniel","5–9"],["Bodhi","4–10"]
@@ -586,13 +589,21 @@
       ]
     };
     function showSeasonStandings(year){
-      const cutoff = year <= 2022 ? 6 : 8;
+      const champions = {2021:"Anish", 2022:"Brendan Lee", 2023:"Corey", 2024:"Marco", 2025:"Ajenth"};
       document.querySelectorAll(".year-btn").forEach(b=>b.classList.toggle("active", Number(b.dataset.year)===year));
       document.getElementById("seasonStandings").innerHTML = `
-        <h3>${year} Official Regular-Season Standings</h3>
-        <p class="smallprint">Final regular-season order before the playoffs. Top ${cutoff} qualified for the playoffs. Highlighted rows = playoff qualifiers.</p>
-        <table><thead><tr><th>Rank</th><th>Manager</th><th>Record</th><th>Result</th></tr></thead>
-        <tbody>${finalStandings[year].map((x,i)=>`<tr class="${i<cutoff?'playoff-row':''}"><td class="rank">${i+1}</td><td>${x[0]}</td><td>${x[1]}</td><td>${i<cutoff?'Playoffs':'—'}</td></tr>`).join("")}</tbody></table>`;
+        <h3>${year} Regular-Season Standings</h3>
+        <p class="smallprint">Official regular-season order before the playoffs. 🏆 marks the eventual league champion.</p>
+        <table>
+          <thead><tr><th>Rank</th><th>Manager</th><th>Record</th></tr></thead>
+          <tbody>${regularSeasonStandings[year].map((x,i)=>`
+            <tr>
+              <td class="rank">${i+1}</td>
+              <td>${x[0]}${x[0]===champions[year] ? ' <span class="champ-mark" title="League champion">🏆</span>' : ''}</td>
+              <td>${x[1]}</td>
+            </tr>`).join("")}
+          </tbody>
+        </table>`;
     }
     function pct(x){return (x*100).toFixed(1)+"%"}
     function renderCareer(){
