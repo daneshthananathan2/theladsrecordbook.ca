@@ -219,7 +219,7 @@
 
 
     @media (min-width: 901px) {
-      #hq .podium-career-row {
+      #hq .champ-career-row {
         display: grid !important;
         grid-template-columns: 260px minmax(0, 1fr) !important;
         gap: 18px !important;
@@ -230,7 +230,7 @@
 
 <style>
 @media (min-width: 901px) {
-  #hq .podium-career-row {
+  #hq .champ-career-row {
     display: grid !important;
     grid-template-columns: 185px minmax(0, 1fr) !important;
     gap: 18px !important;
@@ -285,14 +285,14 @@
           <div class="small">Matt · Lamar You Ready</div>
         </div>
         <div class="card stat">
-          <div class="label">Most championships</div>
-          <div class="value">1</div>
-          <div class="small">5-way tie</div>
-        </div>
-        <div class="card stat">
           <div class="label">Most podiums</div>
           <div class="value">3</div>
           <div class="small">Danesh</div>
+        </div>
+        <div class="card stat">
+          <div class="label">Most championships</div>
+          <div class="value">1</div>
+          <div class="small">5-way tie</div>
         </div>
 
         <div class="card wide">
@@ -569,7 +569,7 @@
         <div class="card stat">
           <div class="label">${s.year}</div>
           <div class="value" style="font-size:1.3rem">${s.champ}</div>
-          <div class="podium-career-row small">${s.team || s.record}</div>
+          <div class="champ-career-row small">${s.team || s.record}</div>
         </div>`).join("");
     }
 
