@@ -304,7 +304,7 @@
           <h3>Career Leaderboard</h3>
           <p class="smallprint">Top qualified managers shown here. Tap “Career Leaderboard” above for the complete all-time table.</p>
           <table>
-            <thead><tr><th>#</th><th>Manager</th><th>Titles</th><th>Record</th><th>Win%</th><th class="hide-mobile">Seasons</th></tr></thead>
+            <thead><tr><th>#</th><th>Manager</th><th>Titles</th><th>Playoffs</th><th>Record</th><th>Win%</th><th class="hide-mobile">Seasons</th></tr></thead>
             <tbody id="careerTop"></tbody>
           </table>
         </div>
@@ -330,7 +330,7 @@
       <div class="card">
         <table>
           <thead>
-            <tr><th>#</th><th>Manager</th><th>Titles</th><th>W</th><th>L</th><th>Win%</th><th>Seasons</th></tr>
+            <tr><th>#</th><th>Manager</th><th>Titles</th><th>Playoffs</th><th>W</th><th>L</th><th>Win%</th><th>Seasons</th></tr>
           </thead>
           <tbody id="careerFull"></tbody>
         </table>
@@ -383,7 +383,7 @@
     <section class="page" id="seasons">
       <div class="section-kicker">Archive</div>
       <h2>Season History</h2>
-      <p class="lede">The official champions, podiums, and final regular-season standings preserved from the NFL Fantasy era.</p>
+      <p class="lede">The official regular-season standings before the playoffs, plus each season’s champion and podium.</p>
       <div class="year-tabs" id="yearTabs"></div>
       <div class="card full" id="seasonStandings" style="margin-bottom:18px"></div>
       <div class="grid" id="seasonCards"></div>
@@ -513,30 +513,30 @@
 
   <script>
     const career = [
-      {name:"Danesh", w:38, l:18, seasons:4, titles:0},
-      {name:"Brendan Sadhra", w:9, l:5, seasons:1, titles:0},
-      {name:"Matt Lee", w:44, l:26, seasons:5, titles:0},
-      {name:"Anish", w:43, l:27, seasons:5, titles:1},
-      {name:"Brendan Lee", w:40, l:30, seasons:5, titles:1},
-      {name:"Marco", w:38, l:32, seasons:5, titles:1},
-      {name:"Tristan", w:30, l:26, seasons:4, titles:0},
-      {name:"Ajenth", w:21, l:21, seasons:3, titles:1},
-      {name:"John Urquhart", w:7, l:7, seasons:1, titles:0},
-      {name:"Sailesh", w:7, l:7, seasons:1, titles:0},
-      {name:"Ryan", w:34, l:36, seasons:5, titles:0},
-      {name:"Justen", w:27, l:29, seasons:4, titles:0},
-      {name:"Corey", w:20, l:22, seasons:3, titles:1},
-      {name:"Manas", w:32, l:38, seasons:5, titles:0},
-      {name:"Teddy", w:19, l:23, seasons:3, titles:0},
-      {name:"Aidan", w:6, l:8, seasons:1, titles:0},
-      {name:"Matt R", w:6, l:8, seasons:1, titles:0},
-      {name:"Gavin", w:17, l:25, seasons:3, titles:0},
-      {name:"Branden", w:22, l:34, seasons:4, titles:0},
-      {name:"Callen", w:11, l:17, seasons:2, titles:0},
-      {name:"Daniel", w:5, l:9, seasons:1, titles:0},
-      {name:"Matt Landero", w:5, l:9, seasons:1, titles:0},
-      {name:"Bodhi", w:4, l:10, seasons:1, titles:0},
-      {name:"Yongiin", w:5, l:23, seasons:2, titles:0}
+      {name:"Danesh", w:38, l:18, seasons:4, titles:0, playoffs:4},
+      {name:"Brendan Sadhra", w:9, l:5, seasons:1, titles:0, playoffs:1},
+      {name:"Matt Lee", w:44, l:26, seasons:5, titles:0, playoffs:4},
+      {name:"Anish", w:43, l:27, seasons:5, titles:1, playoffs:5},
+      {name:"Brendan Lee", w:40, l:30, seasons:5, titles:1, playoffs:3},
+      {name:"Marco", w:38, l:32, seasons:5, titles:1, playoffs:3},
+      {name:"Tristan", w:30, l:26, seasons:4, titles:0, playoffs:3},
+      {name:"Ajenth", w:21, l:21, seasons:3, titles:1, playoffs:1},
+      {name:"John Urquhart", w:7, l:7, seasons:1, titles:0, playoffs:0},
+      {name:"Sailesh", w:7, l:7, seasons:1, titles:0, playoffs:0},
+      {name:"Ryan", w:34, l:36, seasons:5, titles:0, playoffs:3},
+      {name:"Justen", w:27, l:29, seasons:4, titles:0, playoffs:2},
+      {name:"Corey", w:20, l:22, seasons:3, titles:1, playoffs:2},
+      {name:"Manas", w:32, l:38, seasons:5, titles:0, playoffs:0},
+      {name:"Teddy", w:19, l:23, seasons:3, titles:0, playoffs:0},
+      {name:"Aidan", w:6, l:8, seasons:1, titles:0, playoffs:0},
+      {name:"Matt R", w:6, l:8, seasons:1, titles:0, playoffs:0},
+      {name:"Gavin", w:17, l:25, seasons:3, titles:0, playoffs:1},
+      {name:"Branden", w:22, l:34, seasons:4, titles:0, playoffs:1},
+      {name:"Callen", w:11, l:17, seasons:2, titles:0, playoffs:0},
+      {name:"Daniel", w:5, l:9, seasons:1, titles:0, playoffs:0},
+      {name:"Matt Landero", w:5, l:9, seasons:1, titles:0, playoffs:0},
+      {name:"Bodhi", w:4, l:10, seasons:1, titles:0, playoffs:0},
+      {name:"Yongiin", w:5, l:23, seasons:2, titles:0, playoffs:0}
     ].map(x=>({...x,pct:x.w/(x.w+x.l)}));
 
     const seasons = [
@@ -574,8 +574,8 @@
       const cutoff = year <= 2022 ? 6 : 8;
       document.querySelectorAll(".year-btn").forEach(b=>b.classList.toggle("active", Number(b.dataset.year)===year));
       document.getElementById("seasonStandings").innerHTML = `
-        <h3>${year} Final Standings</h3>
-        <p class="smallprint">Top ${cutoff} made the playoffs. Highlighted rows = playoff qualifiers.</p>
+        <h3>${year} Official Regular-Season Standings</h3>
+        <p class="smallprint">Final regular-season order before the playoffs. Top ${cutoff} qualified for the playoffs. Highlighted rows = playoff qualifiers.</p>
         <table><thead><tr><th>Rank</th><th>Manager</th><th>Record</th><th>Result</th></tr></thead>
         <tbody>${finalStandings[year].map((x,i)=>`<tr class="${i<cutoff?'playoff-row':''}"><td class="rank">${i+1}</td><td>${x[0]}</td><td>${x[1]}</td><td>${i<cutoff?'Playoffs':'—'}</td></tr>`).join("")}</tbody></table>`;
     }
@@ -584,13 +584,13 @@
       const sorted = [...career].sort((a,b)=>b.pct-a.pct || b.w-a.w);
       document.getElementById("careerFull").innerHTML = sorted.map((x,i)=>`
         <tr>
-          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.titles}</td><td>${x.w}</td><td>${x.l}</td><td>${pct(x.pct)}</td><td>${x.seasons}</td>
+          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.titles}</td><td>${x.playoffs ?? 0}</td><td>${x.w}</td><td>${x.l}</td><td>${pct(x.pct)}</td><td>${x.seasons}</td>
         </tr>`).join("");
 
       const qualified = [...career].filter(x=>x.seasons>=2).sort((a,b)=>b.pct-a.pct || b.w-a.w).slice(0,10);
       document.getElementById("careerTop").innerHTML = qualified.map((x,i)=>`
         <tr>
-          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.titles}</td><td>${x.w}–${x.l}</td><td>${pct(x.pct)}</td><td class="hide-mobile">${x.seasons}</td>
+          <td class="rank">${i+1}</td><td>${x.name}</td><td>${x.titles}</td><td>${x.playoffs ?? 0}</td><td>${x.w}–${x.l}</td><td>${pct(x.pct)}</td><td class="hide-mobile">${x.seasons}</td>
         </tr>`).join("");
     }
 
@@ -602,16 +602,15 @@
         <div class="card half season-card">
           <div>
             <div class="section-kicker">${s.year} Champion</div>
-            <strong>${s.champ}</strong>
+            <strong>🏆 ${s.champ}</strong>
             <div class="season-meta">${s.team ? `${s.team} · ${s.record}` : s.record}</div>
             <div class="season-meta">🥈 ${s.runner} &nbsp; · &nbsp; 🥉 ${s.third}</div>
           </div>
-          <div class="trophy">🏆</div>
         </div>`).join("");
       document.getElementById("champCards").innerHTML = seasons.map(s=>`
         <div class="card stat">
           <div class="label">${s.year}</div>
-          <div class="value" style="font-size:1.3rem">${s.champ}</div>
+          <div class="value" style="font-size:1.3rem">🏆 ${s.champ}</div>
           <div class="champ-career-row small">${s.team || s.record}</div>
         </div>`).join("");
     }
