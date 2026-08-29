@@ -254,7 +254,9 @@
   
     .champ-mark{font-size:.78em;vertical-align:.08em;margin-left:5px}
 
-  </style>
+  
+    .playoff-badge{display:inline-block;padding:3px 8px;border:1px solid var(--line);border-radius:999px;font-size:.68rem;font-weight:800;letter-spacing:.08em;color:var(--accent);white-space:nowrap}
+</style>
 
 
 </head>
@@ -401,7 +403,7 @@
     <section class="page" id="seasons">
       <div class="section-kicker">Archive</div>
       <h2>Season History</h2>
-      <p class="lede">Each season in official regular-season order before the playoffs. A small 🏆 marks the eventual champion.</p>
+      <p class="lede">Each season in official regular-season order before the playoffs. PLAYOFFS marks teams that qualified, and a small 🏆 marks the eventual champion.</p>
       <div class="year-tabs" id="yearTabs"></div>
       <div class="card full" id="seasonStandings" style="margin-bottom:18px"></div>
       <div class="grid" id="seasonCards"></div>
@@ -434,31 +436,31 @@
         </div>
         <div class="card full">
           <h3>NFL Fantasy Era Scoring Records</h3>
-          <p class="smallprint">Verified from the historical Hall of Fame records. Team names that were not appropriate for the official archive are shown by manager name instead.</p>
+          <p class="smallprint">Verified from the historical Hall of Fame records. Manager names are used throughout this section so records stay consistent across historical team-name changes.</p>
           <div class="grid" style="margin-top:12px">
             <div class="card half">
               <h3 style="font-size:1.2rem">Highest Weekly Team Score by Season</h3>
               <table>
-                <thead><tr><th>Year</th><th>Team / Manager</th><th>Week</th><th>Points</th></tr></thead>
+                <thead><tr><th>Year</th><th>Manager</th><th>Week</th><th>Points</th></tr></thead>
                 <tbody>
-                  <tr><td>2025</td><td>The Wolves</td><td>9</td><td>173.40</td></tr>
-                  <tr><td>2024</td><td>Chasen It Down</td><td>17</td><td>180.58</td></tr>
-                  <tr><td>2023</td><td>Lamar You Ready</td><td>17</td><td>185.14</td></tr>
-                  <tr><td>2022</td><td>Rye High</td><td>11</td><td>166.76</td></tr>
-                  <tr><td>2021</td><td>Mayfield of Dreams</td><td>14</td><td>211.18</td></tr>
+                  <tr><td>2025</td><td>Danesh</td><td>9</td><td>173.40</td></tr>
+                  <tr><td>2024</td><td>Marco</td><td>17</td><td>180.58</td></tr>
+                  <tr><td>2023</td><td>Matt Lee</td><td>17</td><td>185.14</td></tr>
+                  <tr><td>2022</td><td>Ajenth</td><td>11</td><td>166.76</td></tr>
+                  <tr><td>2021</td><td>Branden</td><td>14</td><td>211.18</td></tr>
                 </tbody>
               </table>
             </div>
             <div class="card half">
               <h3 style="font-size:1.2rem">Most Team Points in a Season</h3>
               <table>
-                <thead><tr><th>Year</th><th>Team / Manager</th><th>Points</th></tr></thead>
+                <thead><tr><th>Year</th><th>Manager</th><th>Points</th></tr></thead>
                 <tbody>
                   <tr><td>2025</td><td>Ajenth</td><td>1714.64</td></tr>
-                  <tr><td>2024</td><td>Chasen It Down</td><td>1739.16</td></tr>
+                  <tr><td>2024</td><td>Marco</td><td>1739.16</td></tr>
                   <tr><td>2023</td><td>Corey</td><td>1748.24</td></tr>
-                  <tr><td>2022</td><td>Rye High</td><td>1675.66</td></tr>
-                  <tr><td>2021</td><td>Lamar You Ready</td><td>1878.76</td></tr>
+                  <tr><td>2022</td><td>Ajenth</td><td>1675.66</td></tr>
+                  <tr><td>2021</td><td>Matt Lee</td><td>1878.76</td></tr>
                 </tbody>
               </table>
             </div>
@@ -590,17 +592,19 @@
     };
     function showSeasonStandings(year){
       const champions = {2021:"Anish", 2022:"Brendan Lee", 2023:"Corey", 2024:"Marco", 2025:"Ajenth"};
+      const playoffCutoff = {2021:6, 2022:6, 2023:8, 2024:8, 2025:8};
       document.querySelectorAll(".year-btn").forEach(b=>b.classList.toggle("active", Number(b.dataset.year)===year));
       document.getElementById("seasonStandings").innerHTML = `
         <h3>${year} Regular-Season Standings</h3>
-        <p class="smallprint">Official regular-season order before the playoffs. 🏆 marks the eventual league champion.</p>
+        <p class="smallprint">Official regular-season order before the playoffs. <span class="playoff-badge">PLAYOFFS</span> marks a playoff qualifier. 🏆 marks the eventual league champion.</p>
         <table>
-          <thead><tr><th>Rank</th><th>Manager</th><th>Record</th></tr></thead>
+          <thead><tr><th>Rank</th><th>Manager</th><th>Record</th><th>Postseason</th></tr></thead>
           <tbody>${regularSeasonStandings[year].map((x,i)=>`
             <tr>
               <td class="rank">${i+1}</td>
               <td>${x[0]}${x[0]===champions[year] ? ' <span class="champ-mark" title="League champion">🏆</span>' : ''}</td>
               <td>${x[1]}</td>
+              <td>${i < playoffCutoff[year] ? '<span class="playoff-badge">PLAYOFFS</span>' : '—'}</td>
             </tr>`).join("")}
           </tbody>
         </table>`;
