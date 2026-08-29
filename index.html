@@ -226,6 +226,11 @@
         align-items: stretch;
       }
     }
+
+    .year-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+    .year-btn{border:1px solid var(--line);background:var(--paper);padding:10px 16px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;color:var(--ink)}
+    .year-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .playoff-row{background:rgba(139,47,43,.06)}
 </style>
 
 <style>
@@ -378,7 +383,9 @@
     <section class="page" id="seasons">
       <div class="section-kicker">Archive</div>
       <h2>Season History</h2>
-      <p class="lede">The official champions and podiums preserved from the NFL Fantasy era.</p>
+      <p class="lede">The official champions, podiums, and final regular-season standings preserved from the NFL Fantasy era.</p>
+      <div class="year-tabs" id="yearTabs"></div>
+      <div class="card full" id="seasonStandings" style="margin-bottom:18px"></div>
       <div class="grid" id="seasonCards"></div>
     </section>
 
@@ -393,6 +400,7 @@
             <div class="record-row"><span>Highest career win%*</span><span>Danesh · 67.86%</span></div>
             <div class="record-row"><span>Most career wins</span><span>Matt Lee · 44</span></div>
             <div class="record-row"><span>Most finals appearances</span><span>Danesh / Anish · 2</span></div>
+            <div class="record-row"><span>Most playoff appearances</span><span>Anish · 5</span></div>
             <div class="record-row"><span>Most podium finishes</span><span>Danesh · 3</span></div>
             <div class="record-row"><span>Most championships</span><span>5-way tie · 1</span></div>
           </div>
@@ -539,6 +547,38 @@
       {year:2025, champ:"Ajenth", team:"", record:"10–4", runner:"Danesh", third:"Marco"}
     ];
 
+
+    const finalStandings = {
+      2021:[
+        ["Anish","8–6"],["Danesh","11–3"],["Brendan Lee","9–5"],["Matt Lee","10–4"],["Brendan Sadhra","9–5"],["Branden","9–5"],
+        ["Manas","6–8"],["Marco","7–7"],["Ryan","4–10"],["Yongjin","2–12"],["Daniel","5–9"],["Bodhi","4–10"]
+      ],
+      2022:[
+        ["Brendan Lee","10–4"],["Justen","9–5"],["Tristan","9–5"],["Ryan","8–6"],["Anish","9–5"],["Matt Lee","8–6"],
+        ["Branden","2–12"],["Manas","8–6"],["Yongjin","3–11"],["Ajenth","7–7"],["Marco","4–10"],["John Urquhart","7–7"]
+      ],
+      2023:[
+        ["Corey","9–5"],["Gavin","7–7"],["Danesh","9–5"],["Marco","9–5"],["Matt Lee","9–5"],["Manas","9–5"],["Anish","8–6"],["Teddy","6–8"],
+        ["Brendan Lee","6–8"],["Ryan","4–10"],["Branden","6–8"],["Justen","6–8"],["Callen","4–10"],["Tristan","6–8"]
+      ],
+      2024:[
+        ["Marco","10–4"],["Anish","10–4"],["Justen","8–6"],["Matt Lee","11–3"],["Brendan Lee","10–4"],["Ryan","11–3"],["Danesh","8–6"],["Tristan","7–7"],
+        ["Aidan","6–8"],["Callen","7–7"],["Corey","4–10"],["Gavin","4–10"],["Ajenth","4–10"],["Manas","1–13"],["Teddy","6–8"],["Branden","5–9"]
+      ],
+      2025:[
+        ["Ajenth","10–4"],["Danesh","10–4"],["Marco","8–6"],["Anish","8–6"],["Tristan","8–6"],["Manas","8–6"],["Corey","7–7"],["Ryan","7–7"],
+        ["Justen","4–10"],["Matt R","6–8"],["Gavin","6–8"],["Teddy","7–7"],["Brendan Lee","5–9"],["Matt Lee","6–8"],["Sailesh","7–7"],["Matt Landero","5–9"]
+      ]
+    };
+    function showSeasonStandings(year){
+      const cutoff = year <= 2022 ? 6 : 8;
+      document.querySelectorAll(".year-btn").forEach(b=>b.classList.toggle("active", Number(b.dataset.year)===year));
+      document.getElementById("seasonStandings").innerHTML = `
+        <h3>${year} Final Standings</h3>
+        <p class="smallprint">Top ${cutoff} made the playoffs. Highlighted rows = playoff qualifiers.</p>
+        <table><thead><tr><th>Rank</th><th>Manager</th><th>Record</th><th>Result</th></tr></thead>
+        <tbody>${finalStandings[year].map((x,i)=>`<tr class="${i<cutoff?'playoff-row':''}"><td class="rank">${i+1}</td><td>${x[0]}</td><td>${x[1]}</td><td>${i<cutoff?'Playoffs':'—'}</td></tr>`).join("")}</tbody></table>`;
+    }
     function pct(x){return (x*100).toFixed(1)+"%"}
     function renderCareer(){
       const sorted = [...career].sort((a,b)=>b.pct-a.pct || b.w-a.w);
@@ -555,6 +595,9 @@
     }
 
     function renderSeasons(){
+      document.getElementById("yearTabs").innerHTML = [2025,2024,2023,2022,2021].map(y=>`<button class="year-btn" data-year="${y}">${y}</button>`).join("");
+      document.querySelectorAll(".year-btn").forEach(b=>b.addEventListener("click",()=>showSeasonStandings(Number(b.dataset.year))));
+      showSeasonStandings(2025);
       document.getElementById("seasonCards").innerHTML = seasons.map(s=>`
         <div class="card half season-card">
           <div>
